@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres-db:
-    build: Database/
+    image: ang2tea/l0-database
     restart: always
     ports:
       - 5433:5432
@@ -15,7 +15,7 @@ services:
       - 4222:4222
       - 8222:8222
   web-server:
-    build: Service/
+    image: ang2tea/l0-service
     restart: always
     ports:
       - 8000:8000
@@ -36,7 +36,7 @@ services:
       - postgres-db
       - nats-strem
   web-interface:
-    build: WebInterface/
+    image: ang2tea/l0-web-interface
     restart: always
     ports:
       - 80:80
