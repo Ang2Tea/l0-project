@@ -247,7 +247,7 @@ func main() {
 		ValidJson2,
 		TestJson1,
 		ManyItemJson}
-	sc, err := stan.Connect("test-cluster", "test_push", stan.NatsURL("nats://127.0.0.1:4222"))
+	sc, err := stan.Connect("test-cluster", "test_push", stan.NatsURL("nats://192.168.1.71:4222"))
 	if err != nil {
 		panic(err)
 	}

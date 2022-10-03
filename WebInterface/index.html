@@ -21,7 +21,7 @@ btn.addEventListener('click', onGetOrder);
 
 function onGetOrder() {
     let input = document.getElementById('order_iud')
-    fetch('http://127.0.0.1:8000/orders/' + input.value)
+    fetch(`http://${window.location.host}:8000/orders/` + input.value)
     .then(response => response.json())
     .then(json => output.value = JSON.stringify(json, undefined, 4))
 }
