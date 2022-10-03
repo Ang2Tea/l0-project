@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Интерфейс для отображения данных</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="order_iud" value>
+        <button id="get_order">Поис</button>
+    </div>
+    <textarea class="MyTextArea" id="data" cols=100 rows=20></textarea>
+</body>
+
+<script>
+const btn = document.getElementById('get_order');
+const output = document.getElementById('data')
+
+btn.addEventListener('click', onGetOrder);
+
+function onGetOrder() {
+    let input = document.getElementById('order_iud')
+    fetch('http://127.0.0.1:8000/orders/' + input.value)
+    .then(response => response.json())
+    .then(json => output.value = JSON.stringify(json, undefined, 4))
+}
+</script>
+</html>

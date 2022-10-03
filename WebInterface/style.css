@@ -1,0 +1,12 @@
+* {
+    margin: 5px;
+}
+html, body{
+    height: 100%;
+}
+.MyTextArea{
+    width: 786px; 
+    height: 839px;
+    resize: none; 
+    min-height: 80%;
+}
