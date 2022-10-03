@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  postgres-db:
+    build: Database/
+    restart: always
+    ports:
+      - 5433:5432
+    env_file:
+      - DB.env
+  nats-strem:
+    image: nats-streaming
+    restart: always
+    ports:
+      - 4222:4222
+      - 8222:8222
+  web-server:
+    build: Service/
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - "nats-strem"
+      - "postgres-db"
+    env_file:
+      - DB.env
+    environment:
+      - POSTGRES_SSL=disable
+      - POSTGRES_HOST=postgres-db
+      - POSTGRES_PORT=5432
+      - NATS_CLUSTER_ID=test-cluster
+      - NATS_ADDRESS=nats-strem
+      - NATS_PORT=4222
+      - SERVER_PORT=8000
+    links:
+      - postgres-db
+      - nats-strem
+  web-interface:
+    build: WebInterface/
+    restart: always
+    ports:
+      - 80:80
+
